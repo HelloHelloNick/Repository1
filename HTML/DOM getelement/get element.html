@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script>
+         window.onload = function () {
+        var pTags = document.getElementsByTagName('p');
+        var hTags = document.getElementsByTagName('h1');
+        //
+        for (var i = 0; i < pTags.length; i++) {
+            var curentElement = pTags[i];
+        }
+        var typeStr = hTags.toString();
+        //[object HTMLCollection]
+
+        var elementsCount = hTags.length;
+        var secondElement=  hTags[1];//Undifined
+        var typeStr = hTags[0].toString();
+        //[object HTMLHeadingElement]
+
+        var typeStr = document.toString();
+        //[object HTMLDocument]
+    }
+    function Document_Get() {
+        // Return HTMLCollection
+        var elements0 = document.getElementsByTagName('p'); // '*' return all.
+        var elements1 = document.getElementsByClassName('');
+        var elements2 = document.getElementsByName('');
+        //var elements3 = document.getElementsByTagNameNS('', '');
+        var element1 = document.getElementById('');
+
+        document.getSelection();
+        document.msGetPrintDocumentForNamedFlow('');
+    }
+    function ForeachHTMLCollection() {
+        var pTags = document.getElementsByTagName('p');
+        for (var i = 0; i < pTags.length; i++) {
+            var curentElement = pTags[i];
+        }
+    }
+    function AdjacentNode()
+    {
+        //parentNode、firstChild以及lastChild
+
+    }
+    function Test2()
+    {
+        //nodeValue,removeChild
+    }
+    </script>
+</head>
+
+<body>
+        <p>111</p>
+        <p>222</p>
+        <p>333</p>
+        <p>444</p>
+        <p>555</p>
+        <h1>66666</h1>
+</body>
+
+</html>
