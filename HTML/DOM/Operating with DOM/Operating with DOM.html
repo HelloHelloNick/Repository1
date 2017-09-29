@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <style>
+        .a {
+            float: left;
+            margin: 10px 10px;
+        }
+
+        .color1 {
+            background-color: burlywood;
+        }
+
+        .color2 {
+            background-color: darkkhaki;
+        }
+
+        .color3 {
+            background-color: #00b3b3;
+        }
+
+        .bottom_padding {
+            padding-bottom: 30px;
+        }
+
+        .float_right {
+            float: right;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+        }
+        // accessKey
+        function setAccessKey() {
+            // IE  accessKey='b' 未生效
+            document.getElementById('linkBaidu').accessKey = 'w';
+        }
+        //addEventListener
+        function AddAndRemoveEventListener() {
+            //兼容
+            var btn1 = document.getElementById('btn1')
+            if (btn1.addEventListener) {
+                btn1.addEventListener('click', function () {
+                    document.getElementById('btnResponder1').innerHTML = 'for button1';
+                }, false);
+            }
+            var btn2 = document.getElementById('btn2')
+            if (btn2.attachEvent) {
+                btn2.attachEvent(click, function () {
+                    document.getElementById('btnResponder2').innerHTML = 'for button2';
+                })
+            }
+            //3
+            var btn3 = document.getElementById('btn3');
+            btn3.addEventListener('click', function1);
+            btn3.removeEventListener('click', function1);
+            //3A removed
+            var btn3A = document.getElementById('btn3A');
+            btn3A.addEventListener('click', function1);
+            btn3A.removeEventListener('click', function1);
+            //3B execute once
+            var btn3B = document.getElementById('btn3B');
+            btn3A.addEventListener('click', function3);
+            //4 execute twice
+            var btn4 = document.getElementById('btn4');
+            btn4.addEventListener('click', function () { function2('btn4A'); });
+            btn4.addEventListener('click', function () { function2('btn4B'); });
+            //4A execute once
+            var btn4A = document.getElementById('btn4A');
+            btn4A.addEventListener('click', function3);
+            btn4A.addEventListener('click', function3);
+            //4B execute twice
+            var btn4B = document.getElementById('btn4B');
+            btn4B.addEventListener('click', function () { function2('btn4B'); });
+            btn4B.addEventListener('click', function () { function2('btn4B'); });
+            //5 not work
+            var btn5 = document.getElementById('btn5');
+            btn5.addEventListener('onclick', function () { alert('btn5') });
+        }
+        function function1() {
+            document.getElementById('btnResponder3').innerHTML += 'for button3;';
+        }
+        function function2(n) {
+            alert(n);
+        }
+        function function3() {
+            alert('function3');
+        }
+        //appendChild,removeChild and DocumentFragment.(diference in children and childNodes)
+        function AppendingFragment1A() {
+            var fragment1 = document.createDocumentFragment();
+            var li1 = document.createElement('li');
+            var li2 = document.createElement('li');
+            var li3 = document.createElement('li');
+            li1.innerHTML = '11';
+            li2.innerHTML = '22';
+            li3.innerHTML = '33';
+            fragment1.appendChild(li1);
+            fragment1.appendChild(li2);
+            fragment1.appendChild(li3);
+            document.getElementById('ul1').appendChild(fragment1);
+        }
+        function ElementAppend1() {
+            var ul2 = document.getElementById('ul2');
+            var lastChild = ul2.lastChild;
+            document.getElementById('ul3').appendChild(lastChild);
+        }
+        function removeChild1() {
+            var ul3 = document.getElementById('ul3');
+            ul3.removeChild(ul3.childNodes[0]);
+        }
+        function ElementAppend2() {
+            var ul2 = document.getElementById('ul2');
+            var lastChild = ul2.lastElementChild;
+            document.getElementById('ul3').appendChild(lastChild);
+        }
+        function removeChild2() {
+            var ul3 = document.getElementById('ul3');
+            ul3.removeChild(ul3.children[0]);
+        }
+        function replaceChild1() {
+            var textNode = document.createTextNode('asdfasdfasdfasdfasdf');
+            var ul3 = document.getElementById('ul3');
+            var firstEle = ul3.firstElementChild;
+            firstEle.replaceChild(textNode, firstEle.childNodes[0]);
+        }
+        //attributes，get/setAttribute(AttributeNode)
+        function getAttributes() {
+            var nodeAttributes = document.getElementById('a2').attributes;
+        }
+        function ChangeLink() {
+            var nodeAttributes = document.getElementById('a2').attributes;
+            var attr1 = nodeAttributes['href'];
+            attr1.value = "http://www.sina.com.cn/";
+            alert(attr1.toString() + " " + attr1.name);
+        }
+        function getAndSetAttribute() {
+            //(trouble)
+
+            var textA2 = document.getElementById("textA2");
+            if (textA2.getAttribute("value") == "A") {
+                textA2.setAttribute('value', 'B');
+            }
+            else {
+                textA2.setAttribute('value', 'A');
+            }
+        }
+        function setAttribute1() {
+            var textA2 = document.getElementById("textA2");
+            textA2.setAttribute('value', '123456789');
+        }
+        //get/setAttributeNode（trouble）,CreateAttribute
+        function changeAttributeNode() {
+            var eleNode = document.getElementById('textA3');
+            var attrNode0 = eleNode.getAttributeNode('value');
+            var attrNode1 = document.createAttribute('value');
+            if (attrNode0.nodeValue == 'A') {
+                attrNode1.nodeValue = 'B';
+            }
+            else {
+                attrNode1.nodeValue = 'A';
+            }
+            eleNode.setAttributeNode(attrNode1);
+        }
+        //hasAttribute,hasAttributes,removeAttribute,removeAttributeNode
+        function hasAttributeOrAttributes() {
+            var divA9 = document.getElementById('divA9');
+            var hasAttribute = divA9.hasAttribute('style');
+            var hasAttributes = divA9.hasAttributes();
+            document.getElementById('pA9').innerHTML
+                = 'hasAttribute:' + hasAttribute + '\r\n' +
+                'hasAttributes:' + hasAttributes;
+        }
+        function removeAttribute1() {
+            var divA9 = document.getElementById('divA9');
+            divA9.removeAttribute('style');
+        }
+        function removeAttributeNode1() {
+            var divA91 = document.getElementById('divA91');
+            var attrNode = divA91.getAttributeNode('style');
+            var removedAttributeNode = divA91.removeAttributeNode(attrNode);
+        }
+        //classList
+        function classListTest1() {
+            var div1 = document.getElementById("div1");
+            var classList = div1.classList;
+            var typeStr = classList.toString();
+            alert('value:' + classList + '\r\n' + 'count:' + classList.length);
+        }
+        function addClass() {
+            var classList = document.getElementById('div1').classList;
+            classList.add('float_right');
+        }
+        function checkIndex() {
+            var classList = document.getElementById('div1').classList;
+            if (classList.contains('float_right')) {
+                alert(classList.item(2));
+            }
+        }
+        function removeClass() {
+            var classList = document.getElementById('div1').classList;
+            classList.remove('float_right');
+        }
+        function classListToggle() {
+            var classList = document.getElementById('div1').classList;
+            classList.toggle('float_right');
+        }
+        function classListForceAdd() {
+            var classList = document.getElementById('div1').classList;
+            classList.toggle('float_right', true);
+        }
+        function classListForceRemove() {
+            var classList = document.getElementById('div1').classList;
+            classList.toggle('float_right', false);
+        }
+        //className
+        function editClassName() {
+            var div1 = document.getElementById('div1');
+            alert(div1.className);
+            div1.className += ' float_right';
+        }
+        //clientHeight,clientWidth
+        function calculateClientHeightAndWidth() {
+            var div2 = document.getElementById('div2');
+            var height = div2.clientHeight;
+            var width = div2.clientWidth;
+            alert('heigth:' + height + '\r\n' +
+                'width:' + width);
+        }
+        //cloneNode
+        function cloneTheNode(deep) {
+            var itm = document.getElementById("myList2").lastChild;
+            var cln = itm.cloneNode(deep);
+            document.getElementById("myList1").appendChild(cln);
+        }
+        //contentEditable,isContentEditable
+        function setContentEditability() {
+            var pA1 = document.getElementById('pA1');
+            if (pA1.isContentEditable) {
+                pA1.contentEditable = false;
+            }
+            else {
+                pA1.contentEditable = true;
+            }
+        }
+        //dir
+        function setDirection() {
+            // not work
+            var pB1 = document.getElementById('pB1');
+            if (pB1.dir == 'ltr') {
+                pB1.dir = "rtl";
+            }
+            else {
+                pB1.dir = "ltr";
+            }
+        }
+        //focus,blur
+        function setFocus() {
+            document.getElementById('textA1').focus();
+        }
+        function removeFocus() {
+            document.getElementById('textA1').blur();
+        }
+        //getElementsByClassName
+        function gettingElementsByClassName() {
+            var eles = document.getElementsByClassName('a color2');
+            alert(eles.length);
+        }
+        //id
+        function changeId() {
+            document.getElementsByClassName('tabA1')[0].id = '121212122121212212121212';
+        }
+        function alertId() {
+            alert(document.getElementsByClassName('tabA1')[0].id);
+
+        }
+        function insertingBefore() {
+            var ulA1 = document.getElementById('ulA1');
+            var ele1 = ulA1.childNodes[0];
+            var ele0 = document.createElement('li');
+            var txtNode = document.createTextNode('00');
+            ele0.appendChild(txtNode);
+            var insertedNode = ulA1.insertBefore(ele0, ele1);
+        }
+        function insertingBefore2() {
+            var ulA2 = document.getElementById('ulA2');
+            var ulA3 = document.getElementById('ulA3');
+            ulA2.insertBefore(ulA3.lastChild, ulA2.firstChild);
+        }
+        //isDefaultNamespace,namespaceURI(trouble)
+        function checkNameSpace() {
+            //alert(document.getElementById('divA1').isDefaultNamespace("asdf"));
+            //alert(document.getElementById('divA2').isDefaultNamespace("asdf"));
+            alert(document.getElementById('divA1').namespaceURI);
+        }
+        //isSameNode,isEqualNode
+        function sameNodeAndEqualNode() {
+            var div1 = document.createElement('div');
+            div1.setAttribute("title", "test");
+            var div2 = document.createElement('div');
+            div2.setAttribute("title", "test");
+            console.log(div1.isSameNode(div1));//true
+            console.log(div1.isEqualNode(div2));//true
+            console.log(div1.isSameNode(div2));//false
+        }
+        //nodeName
+        function nodeName1() {
+            var t = '';
+            var divA3 = document.getElementById('divA3');
+            var childNodes = divA3.childNodes
+            for (i = 0; i < childNodes.length; i++) {
+                t = t + childNodes[i].nodeName + '<br/>';
+            }
+            var t2 = '';
+            var divA4 = document.getElementById('divA4');
+            var childNodes2 = divA4.childNodes
+            for (i = 0; i < childNodes2.length; i++) {
+                t2 = t2 + childNodes2[i].nodeName + '<br/>';
+            }
+            document.getElementById('pA3').innerHTML = t;
+            document.getElementById('pA4').innerHTML = t2;
+        }
+        function nodeName2() {
+            var pA5 = document.getElementById('pA5');
+            var textNode = pA5.firstChild;
+            var attrNode = pA5.getAttributeNode('id');
+            document.getElementById('pA6').innerHTML
+                = pA5.nodeName + '  '
+                + textNode.nodeName + '  '
+                + attrNode.nodeName;
+        }
+        //ownerDocument
+        function ownerDocTest() {
+            var divA5 = document.getElementById('divA5');
+
+            var ownerDoc = divA5.ownerDocument;
+
+            var isEqual = document.isEqualNode(ownerDoc);
+            var isSame = document.isSameNode(ownerDoc);
+            document.getElementById('pA7').innerHTML = 'isEqual:' + isEqual;
+            document.getElementById('pA8').innerHTML = 'isSame:' + isSame;
+        }
+        //querySelector
+        function querySelectorTest1() {
+            var divA6 = document.getElementById('divA6');
+            var p2 = divA6.querySelector('p.classA1');
+            p2.innerHTML = 'asdfasdfasdf';
+        }
+        function querySelectorTest2() {
+            var divA7 = document.getElementById('divA7');
+            var p1 = divA7.querySelector('[style]');
+            p1.innerHTML = 'asdfasdfasdf';
+        }
+        function querySelectorTest3() {
+            var divA7 = document.getElementById('divA7');
+            var abc = divA7.querySelector('h2,h3');
+            abc.innerHTML = 'asdfasdfasdf';
+        }
+        function querySelectorTest4() {
+            var divA8 = document.getElementById('divA8');
+            var abc = divA8.querySelector('h2,h3');
+            abc.innerHTML = 'asdfasdfasdf';
+        }
+        //style
+        function styleTest1() {
+            //ellipsis
+        }
+        //tagName
+        function getTagName1() {
+            var tagName1 = document.getElementById('divB1').tagName;
+            var tagName2 = document.getElementById('pB1').tagName;
+            alert(tagName1 + ' and ' + tagName2);
+        }
+        //nodeValue,textContent
+        function getTextContent1() {
+
+            alert(document.getElementById('ulA4').textContent);
+        }
+        function textContentAndNodeValueTest1() {
+            var liA1 = document.getElementById('liA1');
+            alert('node value: ' + liA1.nodeValue + '\r\n' + 'text content: ' + liA1.textContent);
+        }
+        function getNodeValue1() {
+            var pB2 = document.getElementById('pB2');
+            alert('node value: ' + pB2.nodeValue + '\r\n' + 'text  content: ' + pB2.textContent);
+        }
+        function getNodeValue2(obj) {
+            alert('node value: ' + obj.childNodes[0].nodeValue + '\r\n' + 'text  content: ' + obj.textContent);
+        }
+        //title
+        function getTitle1() {
+            alert(document.getElementById('abbrA1').title);
+        }
+        function setTitle1() {
+            document.getElementById('abbrA1').title = '123123123';
+        }
+        //item
+        function itemTest1() {
+            var ulA5 = document.getElementById('ulA5');
+            var children0 = ulA5.children[0];
+            var childNodes0 = ulA5.childNodes[0];
+            var childNodesItem0 = ulA5.childNodes.item(0);
+            var childrenItem0 = ulA5.children.item(0);
+            alert(
+                'children0 and childNodes0 is same:' + children0.isSameNode(childNodes0) + 'node name are:' + childNodes0.nodeName + ' and ' + children0.nodeName + '\r\n' +
+                'children0 and childrenItem0 is same:' + children0.isSameNode(childrenItem0) + '\r\n' +
+                'childNode0 and childNodesItem0 is same:' + childNodes0.isSameNode(childNodesItem0)
+            )
+        }
+    </script>
+</head>
+
+<body>
+    <div class="a color1">
+        <a href="http://www.baidu.com" id="linkBaidu">Link to BaiDu</a>
+    </div>
+    <div class="a color2">
+        <button id="btn1">btn1</button>
+        <p id="btnResponder1"></p>
+        <button id="btn2">btn2</button>
+        <p id="btnResponder2"></p>
+        <button id="btn3" onclick="function1()">btn3</button>
+        <p id="btnResponder3"></p>
+        <button id="btn3A">btn3A</button>
+        <p id="btnResponder3A"></p>
+        <button id="btn3B" onclick="function3()">btn3B</button>
+        <button id="btn4">btn4</button>
+        <p id="btnResponder4"></p>
+        <button id="btn4A">btn4A</button>
+        <button id="btn4B">btn4B</button>
+        <button id="btn5">btn5</button>
+        <p id="btnResponder5"></p>
+    </div>
+    <div class="a color3">
+        <ul id="ul1"></ul>
+
+        <ul id="ul2">
+            <li>2A</li>
+            <li>2B</li>
+            <li>2C</li>
+            <li>2D</li>
+            <li>2E</li>
+            <li>2F</li>
+        </ul>
+        <ul id="ul3">
+            <li>3A</li>
+            <li>3B</li>
+        </ul>
+        <button onclick="ElementAppend1()">append(childNodes)</button>
+        <button onclick="removeChild1()">remove(childNodes)</button><br />
+        <button onclick="ElementAppend2()">append</button>
+        <button onclick="removeChild2()">remove</button>
+        <button onclick="replaceChild1()">replace</button>
+
+    </div>
+    <div class="a color1">
+        <a href="http://www.baidu.com" id="a2" style="font-size:large;color:purple">A link</a>
+        <button onclick="ChangeLink()">click</button>
+    </div>
+    <div id="div1" class="a color2 bottom_padding">
+        <div>
+            <button onclick="classListTest1()">click</button>
+        </div>
+        <div>
+            <button onclick="addClass()">add class</button>
+            <button onclick="checkIndex()">check index</button>
+            <button onclick="removeClass()">remove class</button>
+        </div>
+        <div>
+            <button onclick="classListToggle()">click</button>
+        </div>
+        <div>
+            <button onclick="classListForceAdd()">force add</button>
+            <button onclick="classListForceRemove()">force remove</button>
+        </div>
+    </div>
+    <div class="a">
+        <button onclick="editClassName()">edit class name</button>
+    </div>
+    <div class="a">
+        <div id="div2" class="a color3" style="width:30px;height:30px;border-width:20px;padding:5px;border-color:black;">
+            <div class="color2" style="width:10px;height:10px;">
+
+            </div>
+        </div>
+        <div class="a">
+            <button onclick="calculateClientHeightAndWidth()">click</button>
+        </div>
+    </div>
+    <div class="a">
+
+        <button onclick="cloneTheNode(false)">clone single node</button>
+        <button onclick="cloneTheNode(true)">clone tree</button>
+
+        <ul id="myList1">
+            <li>Coffee</li>
+            <li>Tea</li>
+        </ul>
+        <ul id="myList2">
+            <li>Water</li>
+            <li>Milk</li>
+        </ul>
+    </div>
+    <div class="a color2">
+        <p id="pA1">
+            123456
+        </p>
+        <button onclick="setContentEditability()">click</button>
+    </div>
+    <div class="a color3">
+        <button onclick="setDirection()">click</button>
+        <p id="pB1" dir="rtl">123456789</p>
+    </div>
+    <div class="a color1">
+        <button onclick="setFocus()">set</button>
+
+        <button onclick="removeFocus()">remove</button>
+
+        <input type="text" id="textA1" value="0123456789" />
+    </div>
+    <div class="a color2">
+        <input type="text" value="A" id="textA2" />
+        <button onclick="getAndSetAttribute()">click</button>
+        <button onclick="setAttribute1()">click</button>
+    </div>
+    <div class="a color1">
+        <input type="text" value="A" id="textA3" />
+        <button onclick="changeAttributeNode()">click</button>
+    </div>
+    <div class="a color3">
+        <button onclick="gettingElementsByClassName()">show elements count</button>
+    </div>
+    <div class="a color1">
+        <p class="tabA1" id="pA2">123</p>
+        <button onclick="alertId()">alert id</button>
+        <button onclick="changeId()">change id</button>
+    </div>
+    <div class="a color2">
+        <ul id="ulA1">
+            <li>11</li>
+            <li>22</li>
+        </ul>
+        <button onclick="insertingBefore()">click to insert element</button>
+
+        <ul id="ulA2">
+            <li>11</li>
+            <li>22</li>
+        </ul>
+        <ul id="ulA3">
+            <li>AA</li>
+            <li>BB</li>
+        </ul>
+        <button onclick="insertingBefore2()">click to insert element</button>
+    </div>
+    <div class="a color3">
+        <div id="divA1" xmlns:abc="NSA1">111111</div>
+        <div id="divA2">111111</div>
+    </div>
+    <div class="a color1">
+        <p id="pA3"></p>
+        <p id="pA4"></p>
+        <div id="divA3">
+            <p>
+
+            </p>
+            <script></script>
+            <div></div>
+        </div>
+        <div id="divA4">
+            <p></p>
+            <script></script>
+            <div></div>
+        </div>
+        <p id="pA5">abc</p>
+        <p id="pA6"></p>
+    </div>
+    <div class="a color2">
+        <div id="divA5"></div>
+        <p id="pA7"></p>
+        <p id="pA8"></p>
+    </div>
+    <div class="a color3">
+        <div id="divA6">
+            <p>p1</p>
+            <p class="classA1">p2</p>
+        </div>
+        <div id="divA7">
+            <p style="">p1</p>
+            <p class="classA1">p2</p>
+            <h2 style="width:75px;height:75px;background-color:cadetblue"></h2>
+            <h3 style="width:75px;height:75px;background-color:crimson"></h3>
+        </div>
+        <div id="divA8">
+            <h3 style="width:75px;height:75px;background-color:cadetblue"></h3>
+            <h2 style="width:75px;height:75px;background-color:crimson"></h2>
+        </div>
+    </div>
+    <div class="a color1">
+        <div id="divA9" style="width:75px;height:75px;background-color:cornflowerblue">
+            hasAttribute,hasAttributes
+        </div>
+        <div id="divA91" style="width:75px;height:75px;background-color:firebrick">
+        </div>
+        <p id="pA9"></p>
+        <button onclick="removeAttribute1();">remove attribute</button><br />
+        <button onclick="removeAttributeNode1();">remove attribute node</button>
+    </div>
+    <div class="a color2">
+        <div id="divB1" style="height:75px;width:75px;background-color:lightcoral"></div>
+        <p id="pB1">12345</p>
+        <button onclick="getTagName1();">get tag name</button>
+    </div>
+    <div class="a color3">
+        <ul id="ulA4">
+            <li id="liA1">11111</li>
+            <li>222222</li>
+        </ul>
+        <button onclick="getTextContent1()">get text content</button>
+        <button onclick="textContentAndNodeValueTest1();">test TextContent and NodeValue</button>
+        <p id="pB2">21sad32a13s2d1a321s3d2</p>
+        <button onclick="getNodeValue1();">get text content and node value</button>
+        <button onclick="getNodeValue2(this);">get text content and node value</button>
+    </div>
+    <div class="a color1">
+        <abbr id="abbrA1" title="abc">AAA</abbr>abcdefg.
+        <button onclick="getTitle1();">get title</button>
+        <button onclick="setTitle1();">set title</button>
+    </div>
+    <div class="a color2">
+        <ul id="ulA5">
+            <li>123</li>
+            <li>asdf</li>
+        </ul>
+        <button onclick="itemTest1()">test</button>
+    </div>
+</body>
+
+</html>
