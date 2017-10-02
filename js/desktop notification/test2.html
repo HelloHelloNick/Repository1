@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <!--http://blog.csdn.net/liuhe688/article/details/41971215-->
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     	<script>
+             var NotificationHandler ={
+                 isNotificationSupported: 'Notification' in window,
+                 isPermissionGranted:function(){
+                     return Notification.permission === 'granted';
+                 },
+                 requestPermission: function(){
+                     if(!this.isNotificationSupported){
+                         console.log('current browser do not support notifications.');
+                            return;
+                     }
+                    Notification.requestPermission(function(status){
+                        console.log('status: ' + status);
+                        var permission=Notification.permission;
+                        console.log('permission: '+permission);
+                        NotificationHandler.showNotification();
+                    })
+                 },
+                 showNotification:function(){
+                     if(!this.isNotificationSupported){
+                         console.log('current browser do not support notifications.');
+                         return;
+                     }
+                     if(!this.isPermissionGranted()){
+                         console.log('did not granted permissions to notice.');
+                         return ;
+                     }
+                     var n = new Notification("You got a message",{
+                         body:"123456789"
+                     });
+                     n.onshow=function(){
+                         console.log("noticed.");
+
+                         setTimeout(function(){
+                             n.close();
+                         }, 5000);
+                     };
+                     n.onclick=function(){
+                         alert('open the associated view');
+                         n.close();
+                     }
+                     n.onerror=function(){
+                         console.log('notification encounters an error');
+                        alert("error");
+                     };
+                     n.onclose=function(){
+                         console.log("closed");
+
+                     };
+                 }
+             };
+             document.addEventListener('load',function(){
+                 NotificationHandler.requestPermission();
+             })
+             
+             window.onload =  NotificationHandler.requestPermission();
+        </script>
+    </head>
+    <body>
+        主题内容
+
+    </body>
+</html>

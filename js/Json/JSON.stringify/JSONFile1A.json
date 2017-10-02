@@ -1,0 +1,26 @@
+﻿{
+  "j1A1": [
+    {
+      "j2A1": "value2A1"
+    }
+  ],
+  "j1B1": [
+    {
+      "j2B1": "valuej2Ba",
+      "j2B2": [
+        {
+          "j2B21": "xxx",
+          "j2B22": "xxx"
+        },
+        {
+          "j2B21": "xxx",
+          "j2B22": "xxx"
+        }
+      ]
+    },
+    {
+      "j2C1": "valuej2Ba",
+      "j2C2": "valuej2Ba"
+    }
+  ]
+}

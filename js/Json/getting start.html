@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <style>
+    </style>
+    <!--
+    -    IE8,firefox3有内置json对象，为了兼容性，
+    -    JSON.parse()功能需要json.js文件，
+    -    Download link:https://github.com/douglascrockford/JSON-js
+    -->
+    <script>
+        var json1A;
+        window.onload = function () {
+            json1A = {
+                'employees': [
+                    { 'FirstName': 'AA', 'LastName': 'BB' },
+                    { 'FirstName': 'CC', 'LastName': 'dd' }
+                ]
+            };
+            document.getElementById('p1A').innerText += json1A.employees.length;
+            document.getElementById('p1C').innerText += json1A.employees[0].FirstName;
+    
+            var json2A = eval("(" + "{'employees':[{'FirstName':'AA','LastName':'BB'},{'FirstName':'CC','LastName':'dd'}]}" + ")");
+            json2A.employees[0].FirstName = "1234";
+            document.getElementById('p2A').innerText += json2A.employees[0].FirstName;
+    
+            // 对于json parse方式，"{'employees':[{'FirstName':'AA','LastName':'BB'},{'FirstName':'CC','LastName':'dd'}]}"
+            // 这种以双引号包的字符串是无法解析的。
+            var json3A = JSON.parse('{"employees":[{"FirstName":"AA","LastName":"BB"},{"FirstName":"CC","LastName":"dd"}]}');
+            document.getElementById('p3A').innerText += json3A.employees[0].FirstName;
+    
+        }
+    </script>
+</head>
+
+<body>
+        <p id="p1A">count:</p>  
+        <p id="p1C">first element,first name :</p>
+        <p id="p2A">first element,first name :</p>
+        <p id="p3A">first element,first name :</p>
+</body>
+
+</html>

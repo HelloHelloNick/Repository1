@@ -1,0 +1,65 @@
+﻿<html>
+<div id="holder"></div>
+<div id="holder2"></div>
+<div id="holder3"></div>
+<div id="holder4"></div>
+<div id="holder5"></div>
+</html>
+<script>
+    window.onload = function () {
+        showMulStr1();
+        showMulStr2();
+        showMulStr3();
+        showMulStr4();
+        showMulStr5();
+    }
+    // 多行字符串
+    function showMulStr1() {
+        var content1 = '' +
+            'line 1' + '\r\n' +
+            'line 2' + '\r\n' +
+            'line 3' + '\r\n' +
+            'line 4';
+        var content2 = '' +
+            'line 1' +
+            'line 2' + 
+            'line 3' +
+            'line 4';
+        document.getElementById('holder').innerText = content1+content2;
+    }
+    function showMulStr2() {
+        // 续行符
+        var content2 = 'abc\
+def\
+ghi';
+        document.getElementById('holder2').innerText = content2;
+    }
+    function showMulStr3() {
+        var content = ['a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f'].join('\n');
+        document.getElementById('holder3').innerText = content;
+    }
+    function showMulStr4() {
+        var content = String.prototype.concat.call(
+            'uuuu\n',
+            'kkkk\n',
+            'ssss\n',
+            'llll\n');
+        document.getElementById('holder4').innerText = content;
+    }
+    function showMulStr5() {
+        document.getElementById('holder5').innerText = func1(func2);
+    }
+    function func1(fc) {
+        return fc.toString().split('\n').slice(1, -1).join('\n');
+    }
+    function func2() {/*
+        aaaaa,
+        bbbbb,
+        hello abc
+    */}
+</script>

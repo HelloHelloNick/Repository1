@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    
+    <style>
+ button {
+        margin-top: 10px;
+    }
+    body > div {
+        float: left;
+        margin: 10px 10px;
+        min-height: 75px;
+        min-width: 75px;
+        background-color: steelblue !important;
+    }
+    .btn1 {
+        height: 2em;
+        border: 0;
+        border-radius: .2em;
+        background-color: #34538b;
+        color: #fff;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    </style>
+    <!--
+    -  
+    -
+    -->
+    <script>
+       window.onload = matchMediaTest1();
+       //source: http://www.cnblogs.com/susufufu/p/5749922.html
+       //DOM style obj
+       function domStyleTest1(btn) {
+           var div1 = btn.parentNode;
+           div1.style.backgroundColor = 'black';
+       }
+       //DOM style:set,remove property and edit by cssText.
+       //Only against to Inline styles.
+       function setProperties1(btn) {
+           //change color
+           var div1 = btn.parentNode;
+           div1.style.setProperty('background-color', 'black', 'important');
+           //div1.style.setProperty('background-color', 'black');
+       }
+       function removeProperties1(btn) {
+           //remove color
+           var div1 = btn.parentNode;
+           div1.style.removeProperty('background-color');
+       }
+       function removeCSSText(btn) {
+           //Clear all styles.
+           var div1 = btn.parentNode;
+           div1.style.cssText = '';
+       }
+       function setCSSText(btn) {
+           //Set all styles
+           var div1 = btn.parentNode;
+           div1.style.cssText = 'float: left;margin: 10px 10px;min-height: 100px;min-width: 100px;background-color: red !important;';
+       }
+       function alertLength(btn) {
+           var div1 = btn.parentNode;
+           //margin: 10px 10px;算四个
+           alert(div1.style.length);
+       }
+       function getPriority1(btn) {
+           var div1 = btn.parentNode;
+           alert(div1.style.getPropertyPriority('background-color'));
+       }
+       // not computed attribute.
+       function getPropertyValue1(btn) {
+           var div1 = btn.parentNode;
+           alert(div1.style.getPropertyValue('background-color'));
+       }
+       // not computed attribute.
+       function getPropertyValue2(btn) {
+           var div1 = btn.parentNode;
+           alert(div1.style.backgroundColor);
+       }
+       //Element get,set,remove attribute. Just against to Inline Style Sheet.
+       function elementFunctionOperateStyles1(btn) {
+           var div1 = btn.parentNode;
+           div1.setAttribute('style', 'background-color:white !important;height:100px;');
+       }
+       function elementFunctionOperateStyles2(btn) {
+           var div1 = btn.parentNode;
+           div1.removeAttribute('style');
+       }
+       function elementFunctionOperateStyles3(btn) {
+           var div1 = btn.parentNode;
+           alert(div1.getAttribute('style'));
+       }
+       //CssStyleSheet remove important keyword.
+       function removeImportantKeyword() {
+   
+       }
+       //jQ
+       //with priority
+       function jqChageCSS1() {
+           $('div').css('cssText', 'background-color:white !important;');
+       }
+       function jQGetCSSOptions1() {
+           alert($('#divA1').css('color'));
+       }
+       function jQChangeCSSOptions1() {
+           $('#divA1').css('color', 'black');
+       }
+       function jQChangeManyStyles1() {
+           $('#divA1').css({ 'color': 'black', 'background-color': 'white' });
+       }
+       //document.styleSheets cssRules style
+       function styleSheetTest1() {
+           document.styleSheets[0].cssRules[1].style.backgroundColor = 'white'
+       }
+       //document.styleSheets[0].insertRule  and  rules.Length
+       /*
+           Others:
+               document.styleSheets[0].insertRule('#test:hover{color: white;}', 0);
+               document.styleSheets[0].deleteRule(0); //删除样式表中的第一条规则
+               document.styleSheets[0].cssRules[1].selectorText; //返回选择器字符串
+               document.styleSheets[0].cssRules[1].cssText; //返回规则字符串，含选择器
+               document.styleSheets[0].cssRules[1].style.border;
+               document.styleSheets[0].cssRules[1].style.cssText; //返回当前规则的所有样式声明字符串
+       */
+       function styleSheetTest2() {
+           alert(document.styleSheets[0].cssRules.length);
+           document.styleSheets[0].insertRule('body div{background-color:white !important}', 2)
+           alert(document.styleSheets[0].cssRules.length);
+       }
+       function alertSelectorText1() {
+           alert(document.styleSheets[0].cssRules[0].selectorText);
+       }
+       // Create and append style element
+       function newStyleElement() {
+           var style1 = document.createElement('style');
+           style1.innerHTML = 'body div{background-color:white !important}';
+           document.head.appendChild(style1);
+       }
+       //ComputedStyle
+       // http://www.zhangxinxu.com/wordpress/2012/05/getcomputedstyle-js-getpropertyvalue-currentstyle/
+       function showCSSDetail() {
+           var oDetail=document.getElementById('detail');
+           var oButton = document.getElementById('btnA1');
+           if (oDetail && oButton) {
+               var oStyle = this.currentStyle ? this.currentStyle : window.getComputedStyle(oButton, null);
+               var key, html = '按钮元素表(' + !!this.currentStyle + '):';
+               if (typeof oStyle === 'object') {
+                   for (key in oStyle) {
+                       if(/^[a-z]/i.test(key) && oStyle[key]){
+                           html = html +  key + ":" + oStyle[key] + '<br />';
+                       }
+                   }
+               }
+           }
+           oDetail.innerHTML = html;
+       }
+       function getSpecificStyle(txtObj) {
+           var oButton = document.getElementById('btnA1');
+           alert(window.getComputedStyle(oButton, null).getPropertyValue(txtObj.value));
+       }
+       function getPropertyValueAndGetAttributes() {
+           var oButton = document.getElementById('btnA1');
+           var currentStyles = oButton.currentStyle ? oButton.currentStyle : window.getComputedStyle(oButton, null);
+           if (currentStyles.getPropertyValue) {
+               alert('getPropertyValue获取背景色:' + currentStyles.getPropertyValue('background-color'));
+           }
+           else {
+               alert('getAttribute获取背景色:'+currentStyles.getAttribute('backgroundColor'));
+           }
+       }
+       // get psuedo element styles
+       function getPsuedoEleStyles() {
+           var aA1 = document.getElementById('aA1');
+           var styles = window.getComputedStyle(aA1, '::hover');
+           alert(styles.getPropertyValue('color'));
+       }
+       // add style tag or link tag.
+       function insertStyleTagTest() {
+           var v1 = document.createElement('style');
+           v1.innerHTML = 'button{background-color:#9393FF;}';
+           document.head.appendChild(v1);
+       }
+       function insertOuterStyleFileTest(ordinal) {
+           var v1 = document.createElement('link');
+           v1.setAttribute('rel', 'stylesheet');
+           v1.setAttribute('type', 'text/css');
+           if(ordinal === 1){
+               v1.setAttribute('href', 'Content/Custom1.css');
+           }
+           else if (ordinal === 2) {
+               v1.setAttribute('href', '/Content/Custom2.css');
+           }
+           else if (ordinal === 3) {
+               v1.setAttribute('href', '../Content/Custom3.css');
+           }
+           else if (ordinal === 4) {
+               v1.setAttribute('href', '/../Content/Custom4.css');
+           }
+           else if (ordinal === 5) {
+               v1.setAttribute('href', '../../Content/Custom5.css');
+           }
+           else if (ordinal === 6) {
+               v1.setAttribute('href', '~/Content/Custom6.css');
+           }
+           document.head.appendChild(v1);
+       }
+       //windows.matchMedia
+       function matchMediaTest1() {
+           var item = window.matchMedia("(max-width:800px)");
+           item.addListener(matchMeidaCallBack);
+       }
+       function matchMeidaCallBack(item) {
+           if (item.matches) {
+               alert('width is less than 800px');
+           }
+           else {
+               alert('width is greater than 800px');
+           }
+       }
+    </script>
+</head>
+
+<body>
+        <div>
+                <button onclick="domStyleTest1(this);">click</button>
+            </div>
+            <div>
+                <p>test of changing styles by DOM style object.</p>
+                <button onclick="setProperties1(this);">1 change color</button>
+                <button onclick="removeProperties1(this)">2 remove color</button>
+                <button onclick="removeCSSText(this)">3 clear all styles</button>
+                <button onclick="setCSSText(this)">4 set all styles</button>
+                <button onclick="alertLength(this)">5 alert length(style element count)</button>
+                <button onclick="getPriority1(this)">6 alert priority</button>
+                <br />
+                <button onclick="getPropertyValue1(this)">7 alert property value</button>
+                <button onclick="getPropertyValue2(this)">8 alert property value</button>
+            </div>
+            <div style="height:200px;">
+                <button onclick="elementFunctionOperateStyles1(this);">set attr  66869</button>
+                <button onclick="elementFunctionOperateStyles2(this);">remove attr</button>
+                <button onclick="elementFunctionOperateStyles3(this);">get attr</button>
+            </div>
+            <div>
+                <button onclick="jqChageCSS1()"> jq change background color</button>
+                <div id="divA1" style="color:#336666;background-color:#33CCCC;">
+                    test
+                    <button onclick="jQGetCSSOptions1();">get font color</button>
+                    <button onclick="jQChangeCSSOptions1();">change font color</button>
+                    <button onclick="jQChangeManyStyles1();">change many styles</button>
+                </div>
+            </div>
+            <div>
+                <button onclick="styleSheetTest1();">click to change default div's background color in style sheet</button>
+                <button onclick="styleSheetTest2();">insert rule</button>
+                <button onclick="alertSelectorText1();">alert selector text</button>
+            </div>
+            <div>
+                <button onclick="newStyleElement();">insert style element</button>
+            </div>
+            <div>
+                <input type="button" id="btnA1" onclick="showCSSDetail();" class="btn1" value="click" />
+                <input type="text" id="txtA1" value="background-color" />
+                <input type="button" id="btnA2" onclick="getSpecificStyle(document.getElementById('txtA1'));" value="get specific style" />
+                <input type="button" onclick="getPropertyValueAndGetAttributes();" value="get property value and get attributes(before IE 9.0)"/>
+                <p id="detail"></p>
+                <a style="" onclick="getPsuedoEleStyles();" id="aA1" href="javascript:void(0);" target="_blank" ></a>
+            </div>
+            <div>
+                <button onclick="insertStyleTagTest();">click to add a css style sheet</button>
+                <button onclick="insertOuterStyleFileTest(1);">1 click to add outer style file</button>
+                <button onclick="insertOuterStyleFileTest(2);">2 click to add outer style file</button>
+                <button onclick="insertOuterStyleFileTest(3);">3 click to add outer style file</button>
+                <button onclick="insertOuterStyleFileTest(4);">4 click to add outer style file</button>
+                <button onclick="insertOuterStyleFileTest(5);">5 click to add outer style file</button>
+                <button onclick="insertOuterStyleFileTest(6);">6 click to add outer style file</button>
+            </div>
+</body>
+
+</html>

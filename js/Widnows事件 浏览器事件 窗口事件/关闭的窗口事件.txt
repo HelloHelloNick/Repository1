@@ -1,0 +1,12 @@
+﻿
+    window.onbeforeunload = onbeforeunload_handler;   
+     window.onunload = onunload_handler;   
+     function onbeforeunload_handler(){   
+             var warning="确认退出?abc";      
+         return warning;   
+             }   
+           
+     function onunload_handler(){   
+             var warning="谢谢光临abc";   
+             alert(warning);   
+             }   

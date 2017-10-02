@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script>
+        function anyName2() {
+            alert('function No.5');
+        }
+        (
+            function () {
+                alert('function No.1');
+            }()
+        );
+        (
+            function anyName3() {
+                alert('function No.1.5');
+            }()
+        );
+        (
+            function () {
+                alert('function No.2');
+            }
+        )();
+        // 任意字符前缀，触发
+        ~(
+            function () {
+                alert('function No.3');
+            }
+        )();
+        ~(
+            function () {
+                alert('function No.3.4');
+            }()
+        );
+        !function () {
+            alert('function No.3.5');
+        }();
+        //存疑
+        //~function(){
+        //    alert('function No.3.6');
+        //};
+        (
+            function anyName() {
+                alert('function No.4');
+            }
+        )();
+        (
+            function anyName(str1) {
+                alert('function No.4.5 ' + str1);
+            }
+        )('abc');
+        (
+            function anyName($) {
+                alert('function No.4.6 ' + $);
+            }
+        )('efg');
+        (
+            anyName2
+        )();
+        anyName2();
+        ~anyName2();
+        window.onload = function () {
+            // Calling failed.
+            // anyName();
+            // anyName3();
+
+            anyName2();
+        }
+        // declare
+        function function2() {
+
+        }
+        var function1 = function () {
+
+        }
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

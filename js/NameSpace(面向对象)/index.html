@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    
+    <style>
+
+    </style>
+    <!--
+    -  
+    -
+    -->
+    <script>
+        // e311
+    var NS1 = new function () {
+        var vara1 = "";
+        var vara2 = null;
+        this.func1 = function () {
+            alert('NS1');
+        };
+    }();
+    // others
+    function NSA1() {
+        this.funcA1 = function () {
+            alert('NSA1');
+        }
+    };
+    (function () {
+        this.funcA1 = function () {
+            alert('NSA12');
+        };
+        window.NSA12 = this;
+    })();
+
+    (function () {
+        var _NSA2 = function () {
+
+        }
+        _NSA2.prototype.alert = function () {
+            alert('NSA2');
+        }
+        window.NSA2 = new _NSA2();
+    })();
+
+    // ES6
+    class className{
+        constructor() {
+            //...
+        }
+        costumMethod() {
+            //...
+        }
+    } 
+    </script>
+</head>
+
+<body>
+        <button onclick="NS1.func1()">NS1</button>
+        <button onclick="(new NSA1()).funcA1();">NSA1</button>
+        <button onclick="NSA12.funcA1();">NSA12</button>
+        <button onclick="NSA2.alert();">NSA2</button>
+</body>
+
+</html>

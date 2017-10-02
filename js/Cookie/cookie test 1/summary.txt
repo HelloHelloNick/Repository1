@@ -1,0 +1,7 @@
+/****浏览器*************添加cookie****************
+/*  QQ explorer        false
+/*  Firefox            true
+/*  IE                 true
+/*  Chrome             false
+/*  sougou explorer    false
+/*************************************************

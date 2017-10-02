@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    <script id="json2A" src="~/JSONFile2A.json" type="application/json"></script>
+    <style>
+
+    </style>
+    <!--
+    -  
+    -
+    -->
+    <script>
+        window.onload = function () {
+            //https://segmentfault.com/q/1010000002766945
+            $.get("/JSONFile2A.json").done(function (data) {
+                document.getElementById('p1A').innerText = data[0].J1A[0].J1B1;
+            });
+
+            //http://www.cnblogs.com/leejersey/p/3750232.html
+            $.getJSON("/JSONFile2A.json", function (data) {
+                document.getElementById('p2A').innerText = data[0].J1A[0].J1B1;
+            });
+
+            //http://www.cnblogs.com/leejersey/p/3750232.html
+            //未成功
+            var module1A = document.getElementById('json2A').innerHTML;
+            //document.getElementById('json2A').innerHTML = json1A[0].J1A[0].J1B1;
+        }
+    </script>
+</head>
+
+<body>
+        <p id="p1A"></p>
+        <p id="p2A"></p>
+</body>
+
+</html>

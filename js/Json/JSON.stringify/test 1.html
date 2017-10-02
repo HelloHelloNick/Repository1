@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    <style>
+
+    </style>
+    <!--
+    -http://blog.csdn.net/keda8997110/article/details/8688172
+    -未完
+    -->
+    <script>
+        window.onload = function () {
+            var p1A = document.getElementById('p1A');
+            var p1B = document.getElementById('p1B');
+            var p1C = document.getElementById('p1C');
+            var p1D = document.getElementById('p1D');
+            var p2A = document.getElementById('p2A');
+            var p2B = document.getElementById('p2B');
+            var p2C = document.getElementById('p2C');
+            var p2D = document.getElementById('p2D');
+            $.ajaxSettings.async = false;
+            var jsonFile1A;
+            //如果开头不加斜杠，会向controller发请求
+            $.getJSON("JSONFile1A.json", function (data) {
+                jsonFile1A = data;
+            });
+            p1A.innerText = jsonFile1A;
+            var module1B=JSON.stringify(jsonFile1A);
+            p1B.innerText = module1B;
+    
+            var obj1A = new Object();
+            obj1A.At1A="sadf";
+            obj1A.At1B = "12345";
+            p1C.innerText = obj1A;
+            var module1A=  JSON.stringify(obj1A);
+            p1D.innerText = module1A;
+    
+            //var json1A = { "a": "abc", "b": "efg", "c": "hij" };
+            //var result1A = JSON.stringify(json1A, SetToCapitalized);
+            //p2A.innerText = result1A;
+    
+            //var array1A = new Array();
+            //array1A[0] = 'hello';
+            //array1A[1] = 'ni hao';
+            //var result2A = JSON.stringify(array1A, SetToCapitalized);
+            //p2B.innerText = result2A;
+    
+            //var result3A = JSON.stringify("abcdefg", SetToCapitalized);
+            //p2C.innerText = result3A;
+    
+            var data4A = [
+            { name: "某1", sex: 1, age: 21 },
+            { name: "某2", sex: 0, age: 22 },
+            { name: "某3", sex: 1, age: 23 }
+            ];
+            var result4A = JSON.stringify(data4A, function (k, v) {
+                if (k === "sex") {
+                    return ["女", "男"][v];
+                }
+                return v;
+            });
+            p2D.innerText = result4A;
+    
+            $.ajaxSettings.async = true;
+        }
+        function SetToCapitalized(key,value) {
+            return (value.toString() + 'QQQ').toUpperCase();
+        }
+    </script>
+</head>
+
+<body>
+    <p id="p1A"></p>
+    <p id="p1B"></p>
+    <p id="p1C"></p>
+    <p id="p1D"></p>
+
+
+    <p id="p2A"></p>
+    <p id="p2B"></p>
+    <p id="p2C"></p>
+    <p id="p2D"></p>
+</body>
+
+</html>

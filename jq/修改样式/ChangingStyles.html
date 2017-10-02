@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <script type="text/javascript" src="jquery-1.10.2.min.js" ></script>
+        <script type="text/javascript" src="custom1.js" ></script>
+        <link type="text/css" rel="stylesheet" href="custom1.css" />
+    </head>
+    <body>  
+        <div id="divA1" class="">
+            <button onclick="getClassTest();">get class</button>
+            <button onclick="setClassTest();">set class</button>
+            <button onclick="appendClassTest();">append class</button>
+            <button onclick="toggleClassTest();">toggle class</button>
+            <br/>
+            <button onclick="removeOneClass();">remove one class</button>
+            <button onclick="removeAllClass();">remove all class</button>
+            <br/>
+            <button onclick="hasClassTest1('divStyleA1');">has divStyleA1 ?</button>
+            <button onclick="hasClassTest1('divStyleA2');">has divStyleA2 ?</button>
+            <button onclick="isMethodTest('.divStyleA1');">is divStyleA1 ?</button>
+            <button onclick="isMethodTest('.divStyleA2');">is divStyleA2 ?</button>
+            <br/>
+            <button onclick="getBackgroundColor('');">get background color</button>
+            <button onclick="setBackgroundColor('black');">set background with black</button>
+            <button onclick="setBackgroundColor('yellow');">set background with yellow 1</button>
+            <button onclick="setBackgroundColor2('yellow');">set background with yellow 2</button>
+            <button onclick="clearBackgroundColorFromInlineStyles();">clear background color</button>
+            <br/>
+            <button onclick="setMultiStyles();">set multi-styles</button>
+            <button onclick="changeHeightTest();">another way to set height</button>
+        </div>
+        <div id="divA2">
+            <button onclick="getOffsetTest();">show offset</button>
+            <button onclick="setOffsetTest();">set offset</button>
+            <p id="pA1">result: ... </p>
+        </div>
+        <div id="divA3">
+            <div id="result">Click an element.</div>
+            <p>
+            This is the best way to <span>find</span> an offset.
+            </p>
+            <span>asdf</span>
+            <div class="abs">
+            </div>
+        </div>
+        <div id="divA4">
+            position:absolute, Testing for .position()
+            <div id="divA41">
+            </div>
+            <button id="btnA1" onclick="getPositionTest();" >show postion with .position()</button>
+        </div>
+    </body>
+</html>

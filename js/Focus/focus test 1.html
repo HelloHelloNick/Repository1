@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script>
+        function checkFocus() {
+            if (document.activeElement.id == 'module2A') {
+                document.getElementById('module1A').innerText = 'first text widget';
+            } else {
+                document.getElementById('module1A').innerText = 'second text widget';
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <button id="module2A" onclick="checkFocus()">check page focus</button>
+    <button id="module2B" onclick="checkFocus()">check page focus</button>
+    <p id="module1A">abc</p>
+</body>
+
+</html>

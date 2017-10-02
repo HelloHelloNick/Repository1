@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+
+    <style>
+
+    </style>
+    <!--
+    -  
+    -
+    -->
+    <script>
+        function fileChange() {
+        }
+        function addFileWidget() {
+            var module1A = document.getElementById('module1A');
+            if (module1A.childElementCount < 5) {
+                // add widget
+                var div0A = document.getElementById('module1A');
+                var div1A = document.createElement('div');
+                var file1A = document.createElement('input');
+                file1A.setAttribute('type', 'file');
+                file1A.setAttribute('onchange', 'fileChange()');
+                var a1A = document.createElement('a');
+                a1A.setAttribute('onclick', 'removeItem(this)');
+                a1A.innerText = 'remove';
+    
+                div0A.appendChild(div1A);
+                div1A.appendChild(file1A);
+                div1A.appendChild(a1A);
+    
+            }
+        }
+        function removeItem(obj1A) {
+            //remove parent
+            try {
+                obj1A.parentNode.remove()
+            } catch (e) {
+                obj1A.parentNode.removeNode(true);
+            }
+        }
+    </script>
+</head>
+
+<body>
+        <div id="module1A">
+                <div>
+                    <input type="file" onchange="fileChange()" />
+                    <a onclick="removeItem(this)">remove</a>
+                </div>
+            </div>
+            <div>
+                <button onclick="addFileWidget()">add</button>
+            </div>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+﻿<script src="./jquery-1.10.2.min.js"></script>
+
+<p>phase 2</p>
+<p id="p4A"></p>
+<p id="p4B"></p>
+<p id="p4C"></p>
+<p id="p4D"></p>
+
+<script>
+    var json1A;
+    window.onload = function () {
+      
+        importJSON();
+    }
+    function importJSON() {
+        $.ajax({
+            type:"GET",
+            //url: "C:\\WorkSpace\\coding\\js\\Json\\Base\\WebApplication1\\WebApplication1\\JSONFile2A.json",
+            url: "JSONFile2A.json",
+            dataType:"json",
+            success: function (data) {
+                document.getElementById("p4A").innerText = data[0].J1A[0].J1B1;
+                document.getElementById("p4B").innerText = "";
+                document.getElementById("p4C").innerText = "";
+                document.getElementById("p4D").innerText = "";
+            }
+        });
+    }
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>  
+<html>
+
+    <head>
+
+         <script>
+                window.onload=function(){
+                    alert(containsAll('single','s','n'));
+                    alert(containsAll2('single','e','i'));
+                }
+                function containsAll(stack){
+                    for(var i=1;i< arguments.length;i++){
+                        var item =arguments[i];
+                        if(stack.indexOf(item) === -1)
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                function containsAll2(stack,...items){
+                    for(let item of items){
+                        if(stack.indexOf(item) === -1){
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            </script>
+    </head>
+
+    <body>
+   
+    </body>
+</html>

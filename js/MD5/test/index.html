@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>标题</title>
+    <script src="http://lib.sinaapp.com/js/jquery/2.0.2/jquery-2.0.2.min.js"></script>
+    <script id="json2A" src="~/jquery.md5.js" type="application/json"></script>
+    
+    <style>
+
+    </style>
+    <!--
+    -  
+    -
+    -->
+    <script>
+        window.onload = function () {
+            var result = $.md5('abc');
+            document.getElementById('p1').innerText = result;
+        }
+    </script>
+</head>
+
+<body>
+        <p id="p1"></p>
+</body>
+
+</html>
